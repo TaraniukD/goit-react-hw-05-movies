@@ -1,49 +1,47 @@
+
 import { useState, useEffect } from "react";
 import Notiflix from 'notiflix';
 import { getPopularFilm } from "../Api/Api"
+import { generatePath, Link } from "react-router-dom";
+import { PAGE_NAME } from "router/paths";
 
 export function Home () {
-//   const [ name, ] = useState('');
-  const [ results, setResults ] = useState([]);
-  const [ page, ] = useState(1);
+
+  const [ movies, setMovies ] = useState([]);
+  
 
   useEffect(() => {
-    // if (!name) {
-    //   return;
-    // }
-
-    // setLoading(true);
-
-      const apiData = async () => {
-        const { results } = await getPopularFilm(page);
+      const apiDataMovie = async () => {
+        const { results } = await getPopularFilm();
         
-        if (results === 0) {
-        Notiflix.Notify.info('No image with that name:(');
-        // setLoading(false);
+        if ( results === 0) {
+        Notiflix.Notify.info('No movies with that name:(');
         return;
-      }
-
-      setResults(     results);
-      // setTotalHits(prevState => page === 1 ? totalHits - hits.length :  prevState - hits.length);
-      // setLoading(false);
+        }
+        
+      setMovies(results);
       };
 
-      apiData().catch((error) => {
+      apiDataMovie().catch((error) => {
       Notiflix.Notify.warning(`Something went wrong! ${error}`);
     });
-  }, [page])
+},[])
 
-//   const handleFormSubmit = name => {
-//     setName(name);
-//     setPage(1);
-//   }
-console.log(results);
+ 
+console.log(movies)
 
     return (
       <main>
         <h1>Trending today</h1>
-       <ul>
-        <li></li>
+        <ul> {
+          movies.map(({ title, id, overview, genre_ids  }) => {
+            return (
+              <li key={id} style={{ display: 'block' }} overview={overview} genre_ids={genre_ids}>
+                <Link to={generatePath(PAGE_NAME.movies, {id: id})}>{title}</Link>
+              </li>
+            )
+        })}
+        
        </ul>
       </main>
     );
