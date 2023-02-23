@@ -1,5 +1,5 @@
 # React homework template
-
+API_KEY - 6e3f0e76f4e133cf6c14fe47c545e154
 Этот проект был создан при помощи
 [Create React App](https://github.com/facebook/create-react-app). Для знакомства
 и настройки дополнительных возможностей
