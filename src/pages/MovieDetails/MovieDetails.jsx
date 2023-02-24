@@ -6,6 +6,7 @@ import Notiflix from 'notiflix';
 import { getInfoByFilm } from "../../Api/Api";
 import { Loader } from "components/Loader/Loader";
 import { Poster } from "components/Poster/Poster";
+import { PosterDiv, Div, Ul } from "./MovieDetails.styled";
 
 export const MovieDetails = () => {
   const { id } = useParams();
@@ -50,20 +51,25 @@ export const MovieDetails = () => {
     return <> Error, Something went wrong!</>
   }
 
-  const { poster_path, title, overview, genres } = movies;
+  const { poster_path, title, overview, genres, popularity } = movies;
 
   return (
-      <div>
-        <div>
+      <Div>
+        <PosterDiv>
         <Poster poster={poster_path} title={title} />
-        </div>
+      </PosterDiv>
+      <div>
         <h1>{title}</h1>
+        <p>Rating: {popularity}%</p>
+        <h2>Overview</h2>
         <p>{overview}</p>
-        <ul>
+        <h2>Genres</h2>
+        <Ul>
         { genres.map(movie => {
           return <li key={movie.id}>{movie.name}</li>
          })}
-        </ul>
-     </div>
+        </Ul>
+        </div>
+     </Div>
     );   
 };

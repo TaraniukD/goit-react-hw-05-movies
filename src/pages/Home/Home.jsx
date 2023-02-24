@@ -2,14 +2,15 @@
 import { useState, useEffect } from "react";
 import Notiflix from 'notiflix';
 import { getPopularFilm } from "../../Api/Api"
-import { generatePath, Link } from "react-router-dom";
+import { generatePath } from "react-router-dom";
 import { PAGE_NAME } from "router/paths";
+import { Li, Div, H1, LinkLi, DivContainer } from "./Home.styled";
+import { Poster } from "components/Poster/Poster";
 
 export function Home () {
 
   const [ movies, setMovies ] = useState([]);
   
-
   useEffect(() => {
       const apiDataMovie = async () => {
         const { results } = await getPopularFilm();
@@ -28,19 +29,25 @@ export function Home () {
 },[])
 
     return (
-      <main>
-        <h1>Trending today</h1>
+      <DivContainer>
+        <H1>Trending today</H1>
         <ul> {
-          movies.map(({ title, id, overview, genre_ids  }) => {
+          movies.map(({ title, id, poster_path }) => {
             return (
-              <li key={id} style={{ display: 'block' }} >
-                <Link to={generatePath(PAGE_NAME.movies, {id: id})}>{title}</Link>
-              </li>
+              <Li key={id} style={{ display: 'block' }} >
+                {title &&
+                  <LinkLi to={generatePath(PAGE_NAME.movies, { id: id })}>
+                    <Div>
+                    <Poster poster={poster_path} />
+                    </Div>
+                  {title}
+                  </LinkLi>
+                }
+              </Li>
             )
         })}
-        
        </ul>
-      </main>
+      </DivContainer>
     );
   };
   

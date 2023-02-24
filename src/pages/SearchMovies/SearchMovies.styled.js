@@ -1,7 +1,6 @@
 import {DebounceInput} from 'react-debounce-input';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Poster } from 'components/Poster/Poster';
 
 export const SearchDiv = styled.div`
 margin: 15px auto;
