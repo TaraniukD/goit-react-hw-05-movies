@@ -6,7 +6,7 @@ const API_KEY = '6e3f0e76f4e133cf6c14fe47c545e154';
 export const getPopularFilm = async () => {
     try {
       const fetchAPI = await axios.get(
-        `${BASE_URL}/movie/popular?api_key=${API_KEY}`
+        `${BASE_URL}/trending/all/day?api_key=${API_KEY}`
       );
       const data = await fetchAPI.data;
       return data;
@@ -18,7 +18,20 @@ export const getPopularFilm = async () => {
 export const getInfoByFilm = async (id) => {
     try {
       const fetchAPI = await axios.get(
-        `${BASE_URL}/movie/${id}?api_key=${API_KEY}`
+        `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`
+      );
+      const data = await fetchAPI.data;
+      return data;
+    } catch (error) {
+      console.error('Something is wrong with the search' + error);
+    }
+}
+
+export const searchMoviesbyName = async (query) => {
+    console.log(query)
+    try {
+      const fetchAPI = await axios.get(
+        `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false`
       );
       const data = await fetchAPI.data;
       return data;

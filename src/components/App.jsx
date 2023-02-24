@@ -1,5 +1,5 @@
 import { MainLayout } from "Layouts/MainLayout";
-import ErrorPage from "pages/Error/Error";
+import ErrorPage from "pages/Error";
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { PAGE_NAME } from "router/paths";
@@ -8,6 +8,7 @@ import { PAGE_NAME } from "router/paths";
 // import { About } from "../pages/About";
 import { Home } from "../pages/Home";
 import { MovieDetails } from "../pages/MovieDetails";
+import { SearchMovies } from "../pages/SearchMovies";
 // import { ProductDetails } from "../pages/ProductDetails";
 // import { Products } from "../pages/Products";
 // import { Mission } from "./Mission";
@@ -21,8 +22,9 @@ export function App() {
     <div className="App">
       <Routes>
         <Route path={PAGE_NAME.homepage} element={<MainLayout />}>
-           <Route index element={<Home />} />
-           <Route path={PAGE_NAME.movies} element={<MovieDetails />} />
+          <Route index element={<Home />} />
+          <Route path={PAGE_NAME.search} element={<SearchMovies />} />
+          <Route path={PAGE_NAME.movies} element={<MovieDetails />} />
            <Route path="/error" element={<ErrorPage />} />
            <Route path="*" element={<Navigate to="/error" replace />} />
         </Route>

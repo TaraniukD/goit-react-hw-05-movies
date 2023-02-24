@@ -15,7 +15,7 @@ export function Home () {
         const { results } = await getPopularFilm();
         
         if ( results === 0) {
-        Notiflix.Notify.info('No movies with that name:(');
+        Notiflix.Notify.info('Sorry, No video list :(');
         return;
         }
         
@@ -26,9 +26,6 @@ export function Home () {
       Notiflix.Notify.warning(`Something went wrong! ${error}`);
     });
 },[])
-
- 
-console.log(movies)
 
     return (
       <main>

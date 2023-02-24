@@ -21,7 +21,7 @@ export const MovieDetails = () => {
       const results = await getInfoByFilm(id);
 
       if (results === 0) {
-        Notiflix.Notify.info('No movies with that name:(');
+        Notiflix.Notify.info('Sorry, No video list :(');
         // setLoading(false);
         return;
       }

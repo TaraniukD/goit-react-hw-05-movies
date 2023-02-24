@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 // import { Container } from '../components/Container/Container';
 // import { useMouseContext } from '../context/mouseContext';
-import { PAGE_NAME } from '../../router/paths';
+import { PAGE_NAME } from '../router/paths';
 
 export const ErrorPage = () => {
 //   const { mousePosition } = useMouseContext();
