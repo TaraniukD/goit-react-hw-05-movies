@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import Notiflix from 'notiflix';
-import { getPopularFilm } from "../Api/Api"
+import { getPopularFilm } from "../../Api/Api"
 import { generatePath, Link } from "react-router-dom";
 import { PAGE_NAME } from "router/paths";
 
@@ -33,7 +33,7 @@ export function Home () {
         <ul> {
           movies.map(({ title, id, overview, genre_ids  }) => {
             return (
-              <li key={id} style={{ display: 'block' }} overview={overview} genre_ids={genre_ids}>
+              <li key={id} style={{ display: 'block' }} >
                 <Link to={generatePath(PAGE_NAME.movies, {id: id})}>{title}</Link>
               </li>
             )

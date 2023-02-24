@@ -1,14 +1,15 @@
 import { MainLayout } from "Layouts/MainLayout";
-import ErrorPage from "pages/Error";
+import ErrorPage from "pages/Error/Error";
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { PAGE_NAME } from "router/paths";
+import './App.css';
 
 
 // import { About } from "../pages/About";
-import { Home } from "../pages/Home";
-import { MovieDetails } from "../pages/MovieDetails";
-import { SearchMovies } from "../pages/SearchMovies";
+import { Home } from "../pages/Home/Home";
+import { MovieDetails } from "../pages/MovieDetails/MovieDetails";
+import { SearchMovies } from "../pages/SearchMovies/SearchMovies";
 // import { ProductDetails } from "../pages/ProductDetails";
 // import { Products } from "../pages/Products";
 // import { Mission } from "./Mission";

@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Notiflix from 'notiflix';
-import { getInfoByFilm } from "../Api/Api";
+import { getInfoByFilm } from "../../Api/Api";
 import { Loader } from "components/Loader/Loader";
+import { Poster } from "components/Poster/Poster";
 
 export const MovieDetails = () => {
   const { id } = useParams();
@@ -53,7 +54,9 @@ export const MovieDetails = () => {
 
   return (
       <div>
-        <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} width='320px'/>
+        <div>
+        <Poster poster={poster_path} title={title} />
+        </div>
         <h1>{title}</h1>
         <p>{overview}</p>
         <ul>

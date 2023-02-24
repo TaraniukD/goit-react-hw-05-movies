@@ -1,0 +1,10 @@
+ul {
+    list-style: none;
+    text-decoration: none;
+}
+
+.App {
+    padding: 20px 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
