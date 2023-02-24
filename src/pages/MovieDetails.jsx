@@ -10,49 +10,57 @@ export const MovieDetails = () => {
   const { id } = useParams();
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [ status, setStatus ] = useState('idle');
 
   useEffect(() => {
  
     setLoading(true);
+    setStatus('loading');
 
     const apiDetailsMovie = async () => {
       const results = await getInfoByFilm(id);
 
       if (results === 0) {
         Notiflix.Notify.info('No movies with that name:(');
-        setLoading(false);
+        // setLoading(false);
         return;
       }
       setMovies( results  );
-      setLoading(false);
+      // setLoading(false);
+      setStatus('fulfilled');
     }
 
-    apiDetailsMovie().catch((error) => {
+    apiDetailsMovie()
+    .catch((error) => {
       Notiflix.Notify.warning(`Something went wrong! ${error}`);
+      setStatus('error');
+    })
+    .finally(() => {
+      setLoading(false);
     });
     
-  }, [id])
+  }, [id]);
 
-  if (movies) {
- console.log(movies)
-    console.log(movies.genres.sort());
-  
+  if (status === 'idle' || loading) {
+    return <Loader />
+  }
+
+  if ( status === 'error') {
+    return <> Error, Something went wrong!</>
+  }
+
+  const { poster_path, title, overview, genres } = movies;
+
   return (
-    <>
-      {loading && <Loader />}
       <div>
-        <img src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`} alt={movies.title} />
-         <h1>{movies.title}</h1>
-        <p>{movies.overview}</p>
+        <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} width='320px'/>
+        <h1>{title}</h1>
+        <p>{overview}</p>
         <ul>
-        { movies.genres.map(movie => {
-      return <li key={movie.id}>{movie.name}</li>
-    })}
+        { genres.map(movie => {
+          return <li key={movie.id}>{movie.name}</li>
+         })}
         </ul>
      </div>
-       
-    
-    </>
-    );
-     }
+    );   
 };

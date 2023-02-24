@@ -1,5 +1,7 @@
+import { MainLayout } from "Layouts/MainLayout";
+import ErrorPage from "pages/Error/Error";
 import React from "react";
-import { Route, Routes, } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { PAGE_NAME } from "router/paths";
 
 
@@ -18,8 +20,12 @@ export function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path={PAGE_NAME.homepage} element={<Home />} />
-        <Route path={PAGE_NAME.movies} element={<MovieDetails />} />
+        <Route path={PAGE_NAME.homepage} element={<MainLayout />}>
+           <Route index element={<Home />} />
+           <Route path={PAGE_NAME.movies} element={<MovieDetails />} />
+           <Route path="/error" element={<ErrorPage />} />
+           <Route path="*" element={<Navigate to="/error" replace />} />
+        </Route>
       </Routes>
     </div>
   );
