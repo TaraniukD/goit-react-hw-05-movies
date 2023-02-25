@@ -7,7 +7,7 @@ import { PAGE_NAME } from "router/paths";
 import { Li, Div, H1, LinkLi, DivContainer } from "./Home.styled";
 import { Poster } from "components/Poster/Poster";
 
-export function Home () {
+export const Home = () => {
 
   const [ movies, setMovies ] = useState([]);
   
@@ -34,7 +34,7 @@ export function Home () {
         <ul> {
           movies.map(({ title, id, poster_path }) => {
             return (
-              <Li key={id} style={{ display: 'block' }} >
+              <Li key={id} >
                 {title &&
                   <LinkLi to={generatePath(PAGE_NAME.movies, { id: id })}>
                     <Div>

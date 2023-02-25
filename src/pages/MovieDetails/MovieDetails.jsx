@@ -1,12 +1,13 @@
 
-import { useEffect } from "react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useParams } from "react-router-dom";
 import Notiflix from 'notiflix';
 import { getInfoByFilm } from "../../Api/Api";
 import { Loader } from "components/Loader/Loader";
 import { Poster } from "components/Poster/Poster";
-import { PosterDiv, Div, Ul } from "./MovieDetails.styled";
+import { FilmInfo } from "components/FilmInfo/FilmInfo";
+import { PosterDiv, Div, PageLink } from "./MovieDetails.styled";
+
 
 export const MovieDetails = () => {
   const { id } = useParams();
@@ -53,23 +54,25 @@ export const MovieDetails = () => {
 
   const { poster_path, title, overview, genres, popularity } = movies;
 
-  return (
+  return <>
       <Div>
         <PosterDiv>
-        <Poster poster={poster_path} title={title} />
+        <Poster
+          poster={poster_path}
+          title={title} />
       </PosterDiv>
-      <div>
-        <h1>{title}</h1>
-        <p>Rating: {popularity}%</p>
-        <h2>Overview</h2>
-        <p>{overview}</p>
-        <h2>Genres</h2>
-        <Ul>
-        { genres.map(movie => {
-          return <li key={movie.id}>{movie.name}</li>
-         })}
-        </Ul>
-        </div>
-     </Div>
-    );   
+      <FilmInfo
+        title={title}
+        overview={overview}
+        genres={genres}
+        popularity={popularity} />
+    </Div>
+    <div>
+      <h3>Additional information</h3>
+      <PageLink to="cast">Cast</PageLink>
+      <PageLink to="reviews">Reviews</PageLink>
+    </div>
+    <Outlet />
+    </>
+      
 };

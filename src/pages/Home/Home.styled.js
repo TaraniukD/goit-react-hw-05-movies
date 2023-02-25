@@ -17,6 +17,7 @@ height: 50px;
 `;
 
 export const Li = styled.li`
+display: block;
 margin-top: 5px;
 
 `;

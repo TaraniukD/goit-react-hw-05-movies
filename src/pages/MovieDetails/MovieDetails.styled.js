@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Div = styled.div`
@@ -11,8 +12,22 @@ export const PosterDiv = styled.div`
 max-width: 360px;
 `;
 
-export const Ul= styled.ul`
-display: flex;
-gap: 10px;
-padding: 0;
+export const PageLink = styled(NavLink)`
+display: block;
+text-decoration: none;
+margin-top: 10px;
+font-size: 20px;
+color: #1e81b0;
+width: 80px;
+
+&: hover, 
+ : focus {
+    color: #e28743;
+};
+
+&.active {
+    color: #e28743;
+}
+
 `;
+
