@@ -11,8 +11,6 @@ import { SearchMovies } from "pages/SearchMovies/SearchMovies";
 import { Cast } from "components/Cast/Cast";
 import { Reviews } from "components/Reviews/Reviews";
 
-
- 
 export function App() {
   return (
     <div className="App">
