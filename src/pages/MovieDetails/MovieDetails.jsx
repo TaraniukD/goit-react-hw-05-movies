@@ -6,7 +6,7 @@ import { getInfoByFilm } from "../../Api/Api";
 import { Loader } from "components/Loader/Loader";
 import { Poster } from "components/Poster/Poster";
 import { FilmInfo } from "components/FilmInfo/FilmInfo";
-import { PosterDiv, Div, PageLink } from "./MovieDetails.styled";
+import { PosterDiv, Div, InfoDiv, PageLink } from "./MovieDetails.styled";
 
 
 export const MovieDetails = () => {
@@ -25,11 +25,9 @@ export const MovieDetails = () => {
 
       if (results === 0) {
         Notiflix.Notify.info('Sorry, No video list :(');
-        // setLoading(false);
         return;
       }
       setMovies( results  );
-      // setLoading(false);
       setStatus('fulfilled');
     }
 
@@ -67,12 +65,11 @@ export const MovieDetails = () => {
         genres={genres}
         popularity={popularity} />
     </Div>
-    <div>
+    <InfoDiv>
       <h3>Additional information</h3>
       <PageLink to="cast">Cast</PageLink>
       <PageLink to="reviews">Reviews</PageLink>
-    </div>
+    </InfoDiv>
     <Outlet />
-    </>
-      
+    </>    
 };

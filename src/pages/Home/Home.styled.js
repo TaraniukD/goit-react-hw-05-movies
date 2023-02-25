@@ -28,9 +28,13 @@ align-items: center;
 gap: 15px;
 text-decoration: none;
 color: #154c79;
+border: 1px solid #eeeee4;
+border-radius: 4px;
+scale: 1;
 &:hover, 
 :focus {
     color: blue;
+    scale: 1.02;
 }
 line-height: 1.1;
 font-size: 20px;

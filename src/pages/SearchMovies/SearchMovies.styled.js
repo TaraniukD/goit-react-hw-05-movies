@@ -42,6 +42,11 @@ margin-top: 5px;
 gap: 10px;
 border: 1px solid #eeeee4;
 border-radius: 4px;
+scale: 1;
+&: hover, 
+ : focus {
+    scale: 1.02;
+};
 `;
 
 export const PosterImg = styled.div`
