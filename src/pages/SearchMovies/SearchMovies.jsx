@@ -1,26 +1,30 @@
 import { React, useEffect, useState } from 'react';
 import { searchMoviesbyName } from "Api/Api";
 import Notiflix from "notiflix";
-import { generatePath } from 'react-router-dom';
+import { generatePath, useSearchParams } from 'react-router-dom';
 import { PAGE_NAME } from 'router/paths';
 import { SearchDiv, Form, InputDebounce, Button, Ul, LinkLi, PosterImg } from './SearchMovies.styled';
 import { Poster } from 'components/Poster/Poster';
 
+
+
 export const SearchMovies = () => {
 
     const [movies, setMovies] = useState([]);
-    const [name, setName] = useState('');
-    const [query, setQuery] = useState('');
-    
+    // const [query, setQuery] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const name = searchParams.get('query') ?? '';
+
     useEffect(() => {
         if (!name) {
             return;
         }
-        
+
         const apiSearchMovie = async () => {
             const { results } = await searchMoviesbyName(name);
 
-            if (results === 0) {
+            if (!results) {
                 Notiflix.Notify.info('No movies with that name:(');
                 return;
             }
@@ -32,30 +36,38 @@ export const SearchMovies = () => {
         })
     }, [name]);
 
-    const inputChange = (e) => {
-        setQuery(e.target.value);
-    }
+    // const inputChange = e => { 
+    //     setSearchParams({ query: e.target.value.trim().toLowerCase() })
+    // }
 
-    const formSubmit = (e) => {
+    // const formSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (name.trim() === '') {
+    //         Notiflix.Notify.info('Enter the name of the movies!');
+    //         return;
+    //     }
+    //     setQuery(name);
+    // };
+
+    const onSubmit = e => {
         e.preventDefault();
-        if (query.trim() === '') {
-            Notiflix.Notify.info('Enter the name of the movies!');
-            return;
-        }
-        setName(query);
-    }
+        const form = e.currentTarget;
+        const normalizedQuery = form.elements.query.value.trim().toLowerCase();
+        setSearchParams(normalizedQuery !== '' ? { query: normalizedQuery } : {});
+        form.reset();
+      };
+
 
     return (
         <SearchDiv>
-            <Form onSubmit={formSubmit}>
+            <Form onSubmit={onSubmit} >
                 <InputDebounce
                     type="text"
                     name="query"
                     debounceTimeout={300}
-                    value={name}
                     autoFocus
                     placeholder="Search movies"
-                    onChange={inputChange}
+                    // onChange= {inputChange}
                 />
                 <Button type="submit">Search</Button>
             </Form>
@@ -63,7 +75,7 @@ export const SearchMovies = () => {
             <Ul>
                 {movies.map(({ id, poster_path, title }) => {
                     return <li key={id}>
-                        <LinkLi to={generatePath(PAGE_NAME.movies, { id: id })}>
+                        <LinkLi to={generatePath(PAGE_NAME.movies, { id: id })} state={{ from: `/movies?name=${name}` }} >
                             <PosterImg>
                                 <Poster poster={poster_path} title={title} />
                             </PosterImg>

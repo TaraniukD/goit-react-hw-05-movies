@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import Notiflix from 'notiflix';
 import { getInfoByFilm } from "../../Api/Api";
 import { Loader } from "components/Loader/Loader";
@@ -14,6 +14,9 @@ export const MovieDetails = () => {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(false);
   const [ status, setStatus ] = useState('idle');
+
+  const location = useLocation();
+  const GoBack = location.state?.from ?? '/';
 
   useEffect(() => {
  
@@ -44,15 +47,20 @@ export const MovieDetails = () => {
 
   if (status === 'idle' || loading) {
     return <Loader />
-  }
+  };
 
   if ( status === 'error') {
     return <> Error, Something went wrong!</>
-  }
+  };
+
 
   const { poster_path, title, overview, genres, popularity } = movies;
+  console.log(location)
 
   return <>
+  <button>
+  <Link to={GoBack}>Go back</Link>
+  </button>
       <Div>
         <PosterDiv>
         <Poster
@@ -67,8 +75,8 @@ export const MovieDetails = () => {
     </Div>
     <InfoDiv>
       <h3>Additional information</h3>
-      <PageLink to="cast">Cast</PageLink>
-      <PageLink to="reviews">Reviews</PageLink>
+      <PageLink to="cast" state={location.state}>Cast</PageLink>
+      <PageLink to="reviews" state={location.state}>Reviews</PageLink>
     </InfoDiv>
     <Outlet />
     </>    
