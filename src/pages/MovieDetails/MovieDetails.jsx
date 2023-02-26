@@ -6,7 +6,7 @@ import { getInfoByFilm } from "../../Api/Api";
 import { Loader } from "components/Loader/Loader";
 import { Poster } from "components/Poster/Poster";
 import { FilmInfo } from "components/FilmInfo/FilmInfo";
-import { PosterDiv, Div, InfoDiv, PageLink } from "./MovieDetails.styled";
+import { PosterDiv, Div, Button, InfoDiv, PageLink } from "./MovieDetails.styled";
 
 
 export const MovieDetails = () => {
@@ -56,9 +56,9 @@ export const MovieDetails = () => {
   const { poster_path, title, overview, genres, popularity } = movies;
 
   return <>
-  <button>
+  <Button>
   <Link to={GoBack}>Go back</Link>
-  </button>
+  </Button>
       <Div>
         <PosterDiv>
         <Poster

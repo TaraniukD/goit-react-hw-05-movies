@@ -1,4 +1,3 @@
-import {DebounceInput} from 'react-debounce-input';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,7 +6,7 @@ margin: 15px auto;
 max-width: 1200px
 `;
 
-export const InputDebounce = styled(DebounceInput)`
+export const Input = styled.input`
 padding: 8px 10px;
 border-radius: 4px;
 min-width: 220px;
