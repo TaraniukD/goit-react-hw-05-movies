@@ -3,26 +3,24 @@ import { searchMoviesbyName } from "Api/Api";
 import Notiflix from "notiflix";
 import { generatePath, useSearchParams } from 'react-router-dom';
 import { PAGE_NAME } from 'router/paths';
-import { SearchDiv, Form, InputDebounce, Button, Ul, LinkLi, PosterImg } from './SearchMovies.styled';
+import { SearchDiv, InputDebounce, Button, Ul, LinkLi, PosterImg } from './SearchMovies.styled';
 import { Poster } from 'components/Poster/Poster';
-
-
 
 export const SearchMovies = () => {
 
     const [movies, setMovies] = useState([]);
-    // const [query, setQuery] = useState('');
+    const [query, setQuery] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const name = searchParams.get('query') ?? '';
+    const searchName = searchParams.get('query') ?? '';
 
     useEffect(() => {
-        if (!name) {
+        if (!query) {
             return;
         }
 
         const apiSearchMovie = async () => {
-            const { results } = await searchMoviesbyName(name);
+            const { results } = await searchMoviesbyName(query);
 
             if (!results) {
                 Notiflix.Notify.info('No movies with that name:(');
@@ -34,48 +32,41 @@ export const SearchMovies = () => {
         apiSearchMovie().catch((error) => {
             Notiflix.Notify.warning(`Something went wrong! ${error}`);
         })
-    }, [name]);
+    }, [query]);
 
-    // const inputChange = e => { 
-    //     setSearchParams({ query: e.target.value.trim().toLowerCase() })
-    // }
+    const inputChange = e => { 
+       const value = e.target.value.trim().toLowerCase();
+        setSearchParams( value ? { query: value } : {})
+    }
 
-    // const formSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (name.trim() === '') {
-    //         Notiflix.Notify.info('Enter the name of the movies!');
-    //         return;
-    //     }
-    //     setQuery(name);
-    // };
-
-    const onSubmit = e => {
+    const formSubmit = (e) => {
         e.preventDefault();
-        const form = e.currentTarget;
-        const normalizedQuery = form.elements.query.value.trim().toLowerCase();
-        setSearchParams(normalizedQuery !== '' ? { query: normalizedQuery } : {});
-        form.reset();
-      };
-
+        if (searchName.trim() === '') {
+            Notiflix.Notify.info('Enter the name of the movies!');
+            return;
+        }
+        
+        setQuery(searchName);
+    };
 
     return (
         <SearchDiv>
-            <Form onSubmit={onSubmit} >
+            <form onSubmit={formSubmit} >
                 <InputDebounce
                     type="text"
                     name="query"
                     debounceTimeout={300}
                     autoFocus
                     placeholder="Search movies"
-                    // onChange= {inputChange}
+                    onChange= {inputChange}
                 />
                 <Button type="submit">Search</Button>
-            </Form>
+            </form>
     
             <Ul>
                 {movies.map(({ id, poster_path, title }) => {
                     return <li key={id}>
-                        <LinkLi to={generatePath(PAGE_NAME.movies, { id: id })} state={{ from: `/movies?name=${name}` }} >
+                        <LinkLi to={generatePath(PAGE_NAME.movies, { id: id })} state={{ from: `${PAGE_NAME.search}?query=${query}` }} >
                             <PosterImg>
                                 <Poster poster={poster_path} title={title} />
                             </PosterImg>

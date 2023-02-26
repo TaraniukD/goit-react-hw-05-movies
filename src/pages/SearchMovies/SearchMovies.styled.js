@@ -7,10 +7,6 @@ margin: 15px auto;
 max-width: 1200px
 `;
 
-export const Form = styled.form`
-margin: 15px auto;
-`;
-
 export const InputDebounce = styled(DebounceInput)`
 padding: 8px 10px;
 border-radius: 4px;
@@ -43,8 +39,8 @@ gap: 10px;
 border: 1px solid #eeeee4;
 border-radius: 4px;
 scale: 1;
-&: hover, 
- : focus {
+&:hover, 
+ :focus {
     scale: 1.02;
 };
 `;

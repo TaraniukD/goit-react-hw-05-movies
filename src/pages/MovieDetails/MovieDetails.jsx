@@ -53,9 +53,7 @@ export const MovieDetails = () => {
     return <> Error, Something went wrong!</>
   };
 
-
   const { poster_path, title, overview, genres, popularity } = movies;
-  console.log(location)
 
   return <>
   <button>
