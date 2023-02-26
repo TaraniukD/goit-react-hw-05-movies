@@ -28,24 +28,24 @@ export const Home = () => {
       apiDataMovie().catch((error) => {
       Notiflix.Notify.warning(`Something went wrong! ${error}`);
     });
-},[])
+},[]);
 
     return (
       <DivContainer>
         <H1>Trending today</H1>
         <ul> {
           movies.map(({ title, id, poster_path }) => {
-            return <>
+            return <div key={id}>
               { title &&
-              <Li key={id} >
-                  <LinkLi to={generatePath(PAGE_NAME.movies, { id: id })} state={{ from: location }}>
+              <Li >
+                  <LinkLi  to={generatePath(PAGE_NAME.movies, { id: id })} state={{ from: location }}>
                     <Div>
                     <Poster poster={poster_path} title={title}/>
                     </Div>
                   {title}
                   </LinkLi>
-              </Li>}
-              </>
+              </Li> }
+              </div>
         })}
        </ul>
       </DivContainer>
