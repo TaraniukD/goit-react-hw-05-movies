@@ -22,7 +22,7 @@ border: 1px solid #1e81b0;
 `;
 
 export const PosterDiv = styled.div`
-max-width: 360px;
+width: 360px;
 `;
 
 export const InfoDiv = styled.div`

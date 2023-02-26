@@ -9,7 +9,7 @@ export const Poster = ({ poster, title }) => {
         width="100%"
         height="100%"
       /> :
-      <img src="https://www.co.eureka.nv.us/fair/photos/Eureka%20Fair%202017/res/movie.png"
+      <img src="https://p.kindpng.com/picc/s/736-7369205_play-button-png-pic-video-default-transparent-png.png"
         alt={title}
         width="100%"
         height="100%"
