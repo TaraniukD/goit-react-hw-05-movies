@@ -75,3 +75,5 @@ export const SearchMovies = () => {
         </SearchDiv>
     );
 };
+
+export default SearchMovies;

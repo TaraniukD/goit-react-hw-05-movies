@@ -1,5 +1,6 @@
 import React from "react";
 import { Ul, DivInfo } from "./Filminfo.styled";
+import PropTypes from "prop-types";
 
 export const FilmInfo = ({ title, popularity, overview, genres }) => {
   return <DivInfo>
@@ -15,3 +16,11 @@ export const FilmInfo = ({ title, popularity, overview, genres }) => {
     </Ul>
   </DivInfo>
 };
+
+
+FilmInfo.propTypes = {
+  title: PropTypes.string.isRequired,
+  popularity: PropTypes.number.isRequired,
+  overview: PropTypes.string.isRequired,
+  genres: PropTypes.array.isRequired
+}

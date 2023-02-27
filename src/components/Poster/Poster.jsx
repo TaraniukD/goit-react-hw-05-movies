@@ -1,4 +1,5 @@
 import React from "react";
+import PropType from "prop-types";
 
 export const Poster = ({ poster, title }) => {
 
@@ -15,4 +16,9 @@ export const Poster = ({ poster, title }) => {
         height="100%"
       />}
   </>
+};
+
+Poster.propTypes = {
+  poster: PropType.string,
+  title: PropType.string.isRequired
 };

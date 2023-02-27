@@ -1,12 +1,12 @@
 
 import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import Notiflix from 'notiflix';
 import { getInfoByFilm } from "../../Api/Api";
 import { Loader } from "components/Loader/Loader";
 import { Poster } from "components/Poster/Poster";
 import { FilmInfo } from "components/FilmInfo/FilmInfo";
-import { PosterDiv, Div, Button, InfoDiv, PageLink } from "./MovieDetails.styled";
+import { PosterDiv, Div, Button, InfoDiv, PageLink, ButtonLink } from "./MovieDetails.styled";
 
 
 export const MovieDetails = () => {
@@ -14,7 +14,6 @@ export const MovieDetails = () => {
   const [movies, setMovies] = useState(null);
   const [loading, setLoading] = useState(false);
   const [ status, setStatus ] = useState('idle');
-
   const location = useLocation();
   const GoBack = location.state?.from ?? '/';
 
@@ -57,7 +56,7 @@ export const MovieDetails = () => {
 
   return <>
   <Button>
-  <Link to={GoBack}>Go back</Link>
+  <ButtonLink to={GoBack}>Go back</ButtonLink>
   </Button>
       <Div>
         <PosterDiv>
@@ -79,3 +78,5 @@ export const MovieDetails = () => {
     <Outlet />
     </>    
 };
+
+export default MovieDetails;

@@ -64,3 +64,5 @@ export const Cast = () => {
         })}
     </Ul>
 };
+
+export default Cast;

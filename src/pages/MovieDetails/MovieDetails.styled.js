@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Div = styled.div`
@@ -18,11 +18,14 @@ border: 1px solid #1e81b0;
     background-color: #e28743;
     border: 1px solid #e28743;
 };
+`;
 
+export const ButtonLink = styled(Link)`
+text-decoration: none;
 `;
 
 export const PosterDiv = styled.div`
-width: 360px;
+max-width: 360px;
 `;
 
 export const InfoDiv = styled.div`

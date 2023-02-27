@@ -57,3 +57,5 @@ export const Reviews = () => {
         })}
     </Ul>
 };
+
+export default Reviews;
