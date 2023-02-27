@@ -39,6 +39,9 @@ border: 1px solid #eeeee4;
 border-radius: 4px;
 text-decoration: none;
 color: #154c79;
+line-height: 0.7;
+font-size: 18px;
+
 scale: 1;
 &:hover, 
  :focus {
