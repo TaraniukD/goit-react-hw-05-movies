@@ -37,6 +37,8 @@ margin-top: 5px;
 gap: 10px;
 border: 1px solid #eeeee4;
 border-radius: 4px;
+text-decoration: none;
+color: #154c79;
 scale: 1;
 &:hover, 
  :focus {
